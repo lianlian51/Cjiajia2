@@ -1,19 +1,26 @@
 #include <cstdio>
+#include <mutex>
 
 class Singleton2{
   private:
-    static int* data;
+    volatile static int* data;
+    static std::mutex lock;
+    Sintleton2();
   public:
-    static int* GetInstance(){
+    volatile static int* GetInstance(){
       if(data == NULL)
       {
-        data = new int;
+        lock.lock();
+        if(data == NULL)
+          data = new int;
+        lock.unlock();
       }
       return data;
     }
 };
 
-int *Singleton2::data = NULL;
+std::mutex Singleton2::lock;
+volatile static int *Singleton2::data = NULL;
 
 int main()
 {
