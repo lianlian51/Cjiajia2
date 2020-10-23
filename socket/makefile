@@ -1,5 +1,5 @@
-all:udp_cli udp_srv
-udp_srv:udp_srv.cpp
+all:tcp_srv tcp_cli
+tcp_srv:tcp_srv.cpp
 	g++ -std=c++11 $^ -o $@
-udp_cli:udp_cli.c
-	gcc $^ -o $@
+tcp_cli:tcp_cli.cpp
+	g++ -std=c++11 $^ -o $@

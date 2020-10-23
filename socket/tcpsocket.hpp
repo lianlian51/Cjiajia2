@@ -2,12 +2,13 @@
 #include <cstdlib>
 #include <unistd.h>
 #include <string>
+#include <iostream>
 #include <sys/socket.h>  // 套接字接口头文件
 #include <arpa/inet.h>  // 字节序转换头文件
 #include <netinet/in.h> // 地址结构头文件
 
 
-#define MAX_LISTEN 10;
+#define MAX_LISTEN 10
 #define CHECK_RET(q) if((q) == false) {return -1;}
 class TcpSocket{
 private:
@@ -49,7 +50,7 @@ public:
     return true;
   }
 
-  bool Connet(const std::string &ip, uint16_t port)
+  bool Connect(const std::string &ip, uint16_t port)
   {
     struct sockaddr_in addr;
     addr.sin_family = AF_INET;
@@ -105,10 +106,10 @@ public:
     return true;
   }
 
-  bool Send(std::string *data)
+  bool Send(const std::string &data)
   {
     // send(描述符，要发送的数据，数据的长度，标志位)
-    int ret = send(_sockfd, data.c_str(), dats.size(), 0);
+    int ret = send(_sockfd, data.c_str(), data.size(), 0);
     if(ret < 0)
     {
       perror("send error");
