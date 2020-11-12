@@ -38,7 +38,7 @@ int main(int argc, char* argv[])
     buf.clear();
     std::cout << "server say : ";
     std::cin >> buf;
-    if(new_sock.Recv(&buf) == false){
+    if(new_sock.Send(buf) == false){
       new_sock.Close();  // 一个客户端通信出现问题，不应该退出服务端，而是和下一个客户端进行通信
       continue;
     }
