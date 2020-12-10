@@ -30,19 +30,36 @@ class NQueue{
       return count_;
     }
 
+    void show()
+    {
+      cout << "NO." << ++count_ << endl;
+      for(int i = 0; i < n; i++)
+      {
+        for(int j = 0; j < n; j++)
+        {
+          if(place[i] == j)
+            std::cout << "1";
+          else 
+            std::cout << "0";
+        }
+        std::cout << endl;
+      }
+    }
+
     void search(int k) // k:代表行
     {
       for(int i = 0; i < n; i++) // 代表列
       {
         if(flag[i] == 0 && d1[k - i + n - 1] == 0 && d2[k + i] == 0)
         {
-          place[i] = 1;
+          place[k] = i;
           flag[i] = 1;
           d1[k - i + n - 1] = 1;
           d2[k + i] = 1;
           if(k == n - 1)
           {
-            count_++;
+            //count_++;
+            show();
           }
           else
           {
@@ -59,6 +76,7 @@ class NQueue{
 int main()
 {
   int n;
+  std::cout << "请输入N个皇后：";
   std::cin >> n;
   NQueue q(n);
   q.search(0);

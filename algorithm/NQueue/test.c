@@ -8,20 +8,50 @@ int d2[15]={0}; // 次对角线的和相等
 int count_ = 0; // 计算成功摆放的次数
 
 
+void Print()
+{
+  int i;
+  printf("第%d中方法\n", ++count_);
+  for(i = 0; i < 8; i++)
+  {
+    printf("(%d, %d)\n",i, place[i]);
+  }
+  printf("\n");
+}
 
+void Print_()
+{
+  printf("第%d中方法\n", ++count_);
+  printf("-----------------------------\n");
+  for(int i = 0; i < 8; i++)
+  {
+    for(int j = 0; j < 8; j++)
+    {
+      if(j == 0)
+        printf("|");
+      else if(place[i] == j)
+        printf(" Q |");
+      else 
+        printf("   |");
+    }
+    printf("\n");
+  }
+  printf("-----------------------------\n");
+  printf("\n");
+}
 void search(int k) // k:代表行
 {
   for(int i = 0; i < 8; i++) // 代表列
   {
     if(flag[i] == 0 && d1[k - i + 7] == 0 && d2[k + i] == 0)
     {
-      place[i] = 1;
+      place[k] = i;
       flag[i] = 1;
       d1[k - i + 7] = 1;
       d2[k + i] = 1;
       if(k == 7)
       {
-        count_++;
+        Print_();
       }
       else
       {
@@ -38,6 +68,5 @@ void search(int k) // k:代表行
 int main()
 {
   search(0);
-  printf("一共有%d中方法\n", count_);
   return 0;
 }
