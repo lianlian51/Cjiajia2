@@ -165,3 +165,6 @@ BinTreeNode* GetParent(BinTreeNode* root, BinTreeNode* node)
 
   return NULL;
 }
+
+// 二叉树层序遍历
+
